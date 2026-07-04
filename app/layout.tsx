@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+  google: "Hw3vuVPoK9sCcxdTrfCrk5IY8jFIUIwtVKZDjmtz_2Y",
+},
 };
 
 export default function RootLayout({
