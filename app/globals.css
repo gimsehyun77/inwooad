@@ -24,3 +24,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes stat-up {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+    filter: blur(8px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.animate-stat-up {
+  animation: stat-up 0.8s ease-out both;
+}
