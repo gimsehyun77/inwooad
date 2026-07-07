@@ -65,19 +65,18 @@
       >
         <body className="min-h-full flex flex-col">
           <Script
-            src="https://www.googletagmanager.com/gtag/js?id=AW-18299011325"
-            strategy="afterInteractive"
-          />
+  src="https://www.googletagmanager.com/gtag/js?id=AW-18299011325"
+  strategy="afterInteractive"
+/>
 
-          <Script id="google-ads-tag" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              window.gtag = function gtag(){window.dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-18299011325');
-            `}
-          </Script>
+<Script id="google-ads-tag" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18299011325');
+  `}
+</Script>
           {children}
           </body>
       </html>
