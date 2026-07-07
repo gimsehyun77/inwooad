@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "../../../lib/supabaseAdmin";
-import { sendAdminSms } from "../../../lib/solapi";
+// import { sendAdminSms } from "../../../lib/solapi";
 
 export async function POST(req: Request) {
   try {
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     console.log("새 주문 접수:", order);
 
     try {
-  await sendAdminSms(order);
+  // await sendAdminSms(order);
 } catch (smsError) {
   console.error("관리자 문자 발송 실패:", smsError);
 }
