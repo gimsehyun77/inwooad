@@ -8,7 +8,7 @@ const KAKAO_CHAT_URL = "https://pf.kakao.com/_FhxkPX";
 
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
+    dataLayer?: any[];
   }
 }
 
@@ -105,8 +105,10 @@ ${message || "-"}
         throw new Error(result.message || "견적 문의 저장 실패");
       }
 
-      if (typeof window !== "undefined" && window.gtag) {
-  window.gtag("event", "conversion", {
+      if (typeof window !== "undefined") {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "conversion",
     send_to: "AW-18299011325/zfdzCKGml8wcEP2B05VE",
   });
 }
