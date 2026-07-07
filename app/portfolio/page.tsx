@@ -158,7 +158,7 @@ export default function PortfolioPage() {
       subtitle: "Before → After로 바뀌는 현장 이미지",
       desc: "공사장 가림막, 펜스 광고, 현장 안내 사인물을 제작해 건설현장의 외관을 깔끔하고 신뢰감 있게 연출합니다.",
       image: "/portfolio/fence.jpg",
-      blogUrl: "https://blog.naver.com/여기에-블로그-주소",
+      blogUrl: "https://blog.naver.com/inwooad88/224336154283",
       gallery: [
         {
           title: "Before",
