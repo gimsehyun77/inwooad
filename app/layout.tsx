@@ -2,6 +2,7 @@
   import { Geist, Geist_Mono } from "next/font/google";
   import "./globals.css";
   import Script from "next/script";
+  import { Analytics } from "@vercel/analytics/react";
 
   const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -79,6 +80,7 @@ gtag('config', 'AW-18299011325');
 `}
 </Script>
           {children}
+          <Analytics />
           </body>
       </html>
     );
