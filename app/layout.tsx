@@ -70,12 +70,13 @@
 />
 
 <Script id="google-ads-tag" strategy="afterInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){window.dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-18299011325');
-  `}
+{`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;
+gtag('js', new Date());
+gtag('config', 'AW-18299011325');
+`}
 </Script>
           {children}
           </body>
