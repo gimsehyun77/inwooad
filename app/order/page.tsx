@@ -4,7 +4,23 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 const KAKAO_CHAT_URL = "https://pf.kakao.com/_FhxkPX";
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export default function OrderPage() {
+  const trackKakaoClick = () => {
+    if (typeof window.gtag !== "function") return;
+
+    window.gtag("event", "conversion", {
+      send_to: "AW-18299011325/Nv3RCN-xhMwcEP2B05VE",
+      value: 1.0,
+      currency: "KRW",
+    });
+  };
+
   const [product, setProduct] = useState("현수막");
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
@@ -248,6 +264,7 @@ export default function OrderPage() {
         href={KAKAO_CHAT_URL}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={trackKakaoClick}
         className="
           fixed
           bottom-6

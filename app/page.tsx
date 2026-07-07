@@ -5,7 +5,24 @@ import { useMemo, useState } from "react";
 
 const KAKAO_CHAT_URL = "https://pf.kakao.com/_FhxkPX";
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+
 export default function Home() {
+  const trackKakaoClick = () => {
+    if (typeof window.gtag !== "function") return;
+
+    window.gtag("event", "conversion", {
+      send_to: "AW-18299011325/Nv3RCN-xhMwcEP2B05VE",
+      value: 1.0,
+      currency: "KRW",
+    });
+  };
+
   const products = [
     ["현수막", "사이즈 입력 후 바로 주문", "가장 많이 주문", "/products/sign.png"],
     ["배너", "행사·전시·매장 홍보", "거치대 선택 가능", "/products/banner.png"],
@@ -194,6 +211,7 @@ export default function Home() {
         href={KAKAO_CHAT_URL}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={trackKakaoClick}
         className="flex items-center justify-center bg-[#34412F] text-white px-7 py-4 rounded-xl font-black min-w-[190px] hover:bg-[#4F5F3A] transition"
       >
         💬 카카오톡 상담하기

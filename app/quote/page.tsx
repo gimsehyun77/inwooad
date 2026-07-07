@@ -13,7 +13,21 @@ declare global {
   }
 }
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export default function QuotePage() {
+  const trackKakaoClick = () => {
+  window.gtag?.("event", "conversion", {
+    send_to: "AW-18299011325/Nv3RCN-xhMwcEP2B05VE",
+    value: 1,
+    currency: "KRW",
+  });
+};
+
   const [company, setCompany] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [phone, setPhone] = useState("");
@@ -160,6 +174,7 @@ ${message || "-"}
               href={KAKAO_CHAT_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackKakaoClick}
               className="mt-6 block w-full rounded-2xl bg-[#FEE500] px-6 py-4 text-center text-lg font-black text-black hover:brightness-95 transition"
             >
               💬 카카오톡 상담 시작하기

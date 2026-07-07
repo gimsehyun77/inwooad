@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 const KAKAO_CHAT_URL = "https://pf.kakao.com/_FhxkPX";
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
 
 type GalleryItem = {
   title: string;
@@ -65,6 +70,16 @@ function AnimatedStat({
 }
 
 export default function PortfolioPage() {
+  const trackKakaoClick = () => {
+    if (typeof window.gtag !== "function") return;
+
+    window.gtag("event", "conversion", {
+      send_to: "AW-18299011325/Nv3RCN-xhMwcEP2B05VE",
+      value: 1.0,
+      currency: "KRW",
+    });
+};
+
   const stats = [
     {
       end: 10000,
@@ -594,6 +609,7 @@ export default function PortfolioPage() {
         href={KAKAO_CHAT_URL}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={trackKakaoClick}
         className="
           fixed
           bottom-6
