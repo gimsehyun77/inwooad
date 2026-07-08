@@ -106,7 +106,7 @@ export default function PortfolioPage() {
       subtitle: "브랜드가 돋보이는 공간 연출",
       desc: "팝업스토어, 전시 공간, 포토존, 캐릭터 등신대, 브랜드 월, 제품 진열 공간까지 현장 분위기에 맞는 출력물을 제작합니다.",
       image: "/portfolio/popup.jpeg",
-      blogUrl: "https://blog.naver.com/inwooad88/224335819326",
+      blogUrl: "https://blog.naver.com/inwooad88/224342602255",
       gallery: [
         {
           title: "캐릭터 등신대 제작",
@@ -121,7 +121,7 @@ export default function PortfolioPage() {
         {
           title: "포토존 제작",
           desc: "방문객이 사진을 남기고 공유할 수 있는 포토존, 백월, 브랜드 월을 제작합니다.",
-          image: "/portfolio/popup-photozone.png",
+          image: "/portfolio/popup-photozone.jpeg",
         },
       ],
     },
