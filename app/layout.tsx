@@ -117,7 +117,7 @@ export const metadata: Metadata = {
     google: "26WCmQuqoXa7DFaLJ87Bd37dL6aPueopT6570Uv9Xa0",
     other: {
       "naver-site-verification":
-        "e00b74049475a44932da427a6afb46c9132ee249",
+        "2a06fd5bce5055aa2b160d0a45f7de6aed94c00f",
     },
   },
 };
