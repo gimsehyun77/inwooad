@@ -77,29 +77,79 @@ export default function OrderDetailPage() {
     fetchOrder();
   };
 
-  const downloadFile = async () => {
+const downloadFile = async () => {
   if (!order?.file_path) {
     alert("첨부파일이 없습니다.");
     return;
   }
 
-  const normalizedPath = order.file_path.startsWith("orders/")
-    ? order.file_path
-    : `orders/${order.file_path}`;
+  try {
+    let originalPath = order.file_path.trim();
 
-  console.log("다운로드 경로:", normalizedPath);
+    // 전체 URL로 저장된 경우 버킷 내부 경로만 추출
+    if (originalPath.includes("/order-files/")) {
+      originalPath = originalPath.split("/order-files/").pop() || originalPath;
+    }
 
-  const { data, error } = await supabase.storage
-    .from("order-files")
-    .createSignedUrl(normalizedPath, 60);
+    originalPath = originalPath
+      .replace(/^\/+/, "")
+      .replace(/^order-files\//, "");
 
-  if (error) {
-    console.error("파일 다운로드 오류:", error);
-    alert(`파일 다운로드 링크를 만들지 못했습니다: ${error.message}`);
-    return;
+    // 가능한 저장 경로들을 순서대로 확인
+    const candidatePaths = Array.from(
+      new Set([
+        originalPath,
+        originalPath.replace(/^orders\//, ""),
+        originalPath.startsWith("orders/")
+          ? originalPath
+          : `orders/${originalPath}`,
+      ])
+    );
+
+    console.log("DB 원본 경로:", order.file_path);
+    console.log("확인할 경로:", candidatePaths);
+
+    let signedUrl: string | null = null;
+    let foundPath: string | null = null;
+
+    for (const path of candidatePaths) {
+      const { data, error } = await supabase.storage
+        .from("order-files")
+        .createSignedUrl(path, 60);
+
+      if (!error && data?.signedUrl) {
+        signedUrl = data.signedUrl;
+        foundPath = path;
+        break;
+      }
+
+      console.log(`파일 없음: ${path}`, error?.message);
+    }
+
+    if (!signedUrl) {
+      alert(
+        `Storage에서 파일을 찾지 못했습니다.\n\n확인한 경로:\n${candidatePaths.join(
+          "\n"
+        )}\n\nSupabase Storage의 order-files 버킷을 확인해 주세요.`
+      );
+      return;
+    }
+
+    console.log("실제로 찾은 경로:", foundPath);
+
+    const link = document.createElement("a");
+    link.href = signedUrl;
+    link.download = order.file_name || "첨부파일";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (error) {
+    console.error("파일 다운로드 중 오류:", error);
+    alert("파일 다운로드 중 오류가 발생했습니다.");
   }
-
-  window.open(data.signedUrl, "_blank", "noopener,noreferrer");
 };
 
   useEffect(() => {
