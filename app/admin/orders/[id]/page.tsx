@@ -78,23 +78,29 @@ export default function OrderDetailPage() {
   };
 
   const downloadFile = async () => {
-    if (!order?.file_path) {
-      alert("첨부파일이 없습니다.");
-      return;
-    }
+  if (!order?.file_path) {
+    alert("첨부파일이 없습니다.");
+    return;
+  }
 
-    const { data, error } = await supabase.storage
-      .from("order-files")
-      .createSignedUrl(order.file_path, 60);
+  const normalizedPath = order.file_path.startsWith("orders/")
+    ? order.file_path
+    : `orders/${order.file_path}`;
 
-    if (error) {
-      console.error(error);
-      alert("파일 다운로드 링크를 만들지 못했습니다.");
-      return;
-    }
+  console.log("다운로드 경로:", normalizedPath);
 
-    window.open(data.signedUrl, "_blank");
-  };
+  const { data, error } = await supabase.storage
+    .from("order-files")
+    .createSignedUrl(normalizedPath, 60);
+
+  if (error) {
+    console.error("파일 다운로드 오류:", error);
+    alert(`파일 다운로드 링크를 만들지 못했습니다: ${error.message}`);
+    return;
+  }
+
+  window.open(data.signedUrl, "_blank", "noopener,noreferrer");
+};
 
   useEffect(() => {
     fetchOrder();
