@@ -154,7 +154,7 @@ export default function Home() {
   {/* 내용 */}
   <div className="relative z-10 max-w-6xl mx-auto px-6">
     <p className="text-[#4F5F3A] font-bold mb-4">
-      행사 · 전시 · 매장 공간 제작 전문
+      행사 · 전시 · 매장 공간 · 펜스 · 현수막 · 배너 등 실사출력 전문
     </p>
 
     <h1 className="text-5xl md:text-7xl font-black leading-tight">
