@@ -164,7 +164,7 @@ export default function Home() {
     </h1>
 
     <p className="mt-6 text-2xl md:text-3xl font-bold">
-      실사출력부터 공간 연출까지
+      실사출력부터 시공까지 합리적인 가격에!
     </p>
 
     <p className="mt-5 text-xl text-[#5F695C]">
